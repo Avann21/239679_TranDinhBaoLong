@@ -11,15 +11,37 @@ và xóa hồ sơ nhân viên. Dữ liệu lưu trên MongoDB Atlas, backend và
 frontend triển khai trên Render.
 
 ## Công nghệ sử dụng
-- Frontend: React
+- Frontend: React (Vite)
 - Backend: Node.js + Express
 - Database: MongoDB Atlas
 - Container: Docker, Docker Hub
 - Deploy: Render
 
-○	Link GitHub repository: https://github.com/longtrann20-sketch/239679_TranDinhBaoLong.git
-○	Link Docker Hub Backend.
-○	Link Docker Hub Frontend.
-○	Link Render App.
-○	Link Render API.
-○	Link MongoDB Atlas: mongodb+srv://239679-TranDinhBaoLong:Long@1234@cluster0.z1v98m5.mongodb.net/
+## Hướng dẫn chạy môi trường phát triển
+
+### Backend
+```bash
+cd backend
+cp .env.example .env
+# Chỉnh MONGODB_URI và PORT trong .env
+npm install
+npm start
+```
+Backend chạy tại `http://localhost:5000`, endpoint kiểm tra: `GET /health`.
+
+### Frontend
+```bash
+cd frontend
+cp .env.example .env
+# Chỉnh VITE_API_URL trỏ đến backend
+npm install
+npm run dev
+```
+
+## Link tài nguyên
+- Link GitHub repository: https://github.com/Avann21/239679_TranDinhBaoLong.git
+- Link Docker Hub Backend: (chưa có)
+- Link Docker Hub Frontend: (chưa có)
+- Link Render App: (chưa có)
+- Link Render API: (chưa có)
+- Link MongoDB Atlas: (MongoDB Atlas, không công khai chuỗi kết nối)
