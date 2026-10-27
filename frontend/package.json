@@ -1,0 +1,13 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Giao dien nguoi dung cho du an MSSV_hoten",
+  "scripts": {
+    "start": "serve -s build",
+    "build": "echo 'placeholder build'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
