@@ -45,9 +45,29 @@ h1 {
 .btn-danger:hover {
   background: #b91c1c;
 }
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .btn-sm {
   padding: 6px 10px;
   font-size: 0.85rem;
+}
+.actions {
+  white-space: nowrap;
+}
+.actions .btn:not(:first-child) {
+  margin-left: 6px;
+}
+.modal fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+input:disabled, select:disabled {
+  background: #f3f4f6;
+  color: #4b5563;
 }
 .card {
   background: #fff;

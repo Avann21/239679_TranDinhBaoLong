@@ -10,10 +10,28 @@ app.use(cors());
 app.use(express.json());
 
 // Health check
-app.get('/health', (req, res) => res.json({ status: 'OK', time: new Date() }));
+app.get('/health', (req, res) =>
+  res.json({
+    status: 'OK',
+    db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    time: new Date(),
+  }),
+);
 
 // Routes
 app.use('/api/employees', require('./routes/employees'));
+
+// Endpoint không tồn tại
+app.use((req, res) => res.status(404).json({ message: 'Không tìm thấy endpoint' }));
+
+// Luôn trả lỗi dạng JSON, kể cả khi body JSON sai định dạng
+app.use((err, req, res, next) => {
+  const status = err.status || err.statusCode || 500;
+  res.status(status).json({
+    message: status === 400 ? 'Dữ liệu JSON không hợp lệ' : 'Lỗi server',
+    error: err.message,
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;

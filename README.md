@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Hệ thống Quản lý Nhân sự (HR Management System)
 
 ## Thông tin sinh viên
@@ -19,7 +18,6 @@ frontend triển khai trên Render.
 - Deploy: Render
 
 ## Hướng dẫn chạy môi trường phát triển
-
 ### Backend
 ```bash
 cd backend
@@ -39,9 +37,28 @@ npm install
 npm run dev
 ```
 
+### Backend bằng Docker
+```bash
+cd backend
+docker build -t longtran2111/backend:latest .
+docker run -d --name backend -p 5000:5000 \
+  -e PORT=5000 \
+  -e MONGODB_URI="<chuỗi kết nối MongoDB Atlas>" \
+  longtran2111/backend:latest
+```
+Hoặc dùng image có sẵn trên Docker Hub:
+```bash
+docker pull longtran2111/backend:latest
+docker run -d --name backend -p 5000:5000 \
+  -e PORT=5000 \
+  -e MONGODB_URI="<chuỗi kết nối MongoDB Atlas>" \
+  longtran2111/backend:latest
+```
+Kiểm tra: `curl http://localhost:5000/health`.
+
 ## Link tài nguyên
 - Link GitHub repository: https://github.com/Avann21/239679_TranDinhBaoLong.git
-- Link Docker Hub Backend: (chưa có)
+- Link Docker Hub Backend: https://hub.docker.com/r/longtran2111/backend
 - Link Docker Hub Frontend: (chưa có)
 - Link Render App: (chưa có)
 - Link Render API: (chưa có)

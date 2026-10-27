@@ -1,49 +1,30 @@
-const API_URL = import.meta.env.VITE_API_URL || '/api';
+const API_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
-export const fetchEmployees = async (search = '') => {
-  const url = search ? `${API_URL}?search=${encodeURIComponent(search)}` : API_URL;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Không tải được danh sách nhân viên');
-  return res.json();
-};
-
-export const fetchEmployee = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`);
-  if (!res.ok) throw new Error('Không tải được thông tin nhân viên');
-  return res.json();
-};
-
-export const createEmployee = async (data) => {
-  const res = await fetch(`${API_URL}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || 'Thêm nhân viên thất bại');
+const request = async (path, options) => {
+  let res;
+  try {
+    res = await fetch(`${API_URL}${path}`, options);
+  } catch {
+    throw new Error('Không kết nối được tới máy chủ. Vui lòng kiểm tra Backend API.');
   }
-  return res.json();
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.message || 'Yêu cầu thất bại, vui lòng thử lại');
+  return data;
 };
 
-export const updateEmployee = async (id, data) => {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || 'Cập nhật thất bại');
-  }
-  return res.json();
-};
+const jsonOptions = (method, body) => ({
+  method,
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body),
+});
 
-export const deleteEmployee = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || 'Xóa thất bại');
-  }
-  return res.json();
-};
+export const fetchEmployees = (search = '') =>
+  request(search ? `?search=${encodeURIComponent(search)}` : '');
+
+export const fetchEmployee = (id) => request(`/${id}`);
+
+export const createEmployee = (data) => request('', jsonOptions('POST', data));
+
+export const updateEmployee = (id, data) => request(`/${id}`, jsonOptions('PUT', data));
+
+export const deleteEmployee = (id) => request(`/${id}`, { method: 'DELETE' });
