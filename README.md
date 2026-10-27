@@ -91,4 +91,4 @@ nginx trong container chuyển tiếp sang `BACKEND_URL` (truyền lúc chạy, 
 - Link Docker Hub Frontend: https://hub.docker.com/r/longtran2111/frontend
 - Link Render App (Frontend): https://two39679-trandinhbaolong.onrender.com
 - Link Render API (Backend): https://two39679-trandinhbaolong-backend.onrender.com
-- Link MongoDB Atlas: MongoDB Atlas (chuỗi kết nối chỉ lưu trong biến môi trường MONGODB_URI, không đưa lên GitHub)
+- Link MongoDB Atlas: mongodb+srv://239679-TranDinhBaoLong:Long123456@cluster0.z1v98m5.mongodb.net/
