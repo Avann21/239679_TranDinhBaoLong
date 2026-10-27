@@ -56,10 +56,30 @@ docker run -d --name backend -p 5000:5000 \
 ```
 Kiểm tra: `curl http://localhost:5000/health`.
 
+### Frontend bằng Docker
+```bash
+cd frontend
+docker build -t longtran2111/frontend:latest .
+docker run -d --name frontend -p 8080:80 \
+  -e BACKEND_URL="https://<backend-api>" \
+  longtran2111/frontend:latest
+```
+Hoặc dùng image có sẵn trên Docker Hub:
+```bash
+docker pull longtran2111/frontend:latest
+docker run -d --name frontend -p 8080:80 \
+  -e BACKEND_URL="https://<backend-api>" \
+  longtran2111/frontend:latest
+```
+Frontend chạy tại `http://localhost:8080`. Ứng dụng gọi API qua đường dẫn `/api`,
+nginx trong container chuyển tiếp sang `BACKEND_URL` (truyền lúc chạy, không nhúng
+địa chỉ localhost vào image). Nếu muốn nhúng thẳng địa chỉ API vào bundle thì build với
+`--build-arg VITE_API_URL=https://<backend-api>/api`.
+
 ## Link tài nguyên
 - Link GitHub repository: https://github.com/Avann21/239679_TranDinhBaoLong.git
 - Link Docker Hub Backend: https://hub.docker.com/r/longtran2111/backend
-- Link Docker Hub Frontend: (chưa có)
+- Link Docker Hub Frontend: https://hub.docker.com/r/longtran2111/frontend
 - Link Render App: (chưa có)
 - Link Render API: (chưa có)
-- Link MongoDB Atlas: (MongoDB Atlas, không công khai chuỗi kết nối)
+- Link MongoDB Atlas: mongodb+srv://239679-TranDinhBaoLong:Long@1234@cluster0.z1v98m5.mongodb.net/
