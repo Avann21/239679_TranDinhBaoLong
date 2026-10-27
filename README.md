@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hệ thống Quản lý Nhân sự (HR Management System)
 
 ## Thông tin sinh viên
