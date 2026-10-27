@@ -274,7 +274,8 @@ export default function App() {
               {viewMode ? (
                 <>
                   <button type="button" className="btn" onClick={closeModal}>Đóng</button>
-                  <button type="button" className="btn btn-primary" onClick={() => setViewMode(false)}>Chỉnh sửa</button>
+                  {/* preventDefault: React đổi chính node này thành nút submit ngay trong cú click, không chặn sẽ tự lưu form */}
+                  <button type="button" className="btn btn-primary" onClick={(e) => { e.preventDefault(); setViewMode(false); }}>Chỉnh sửa</button>
                 </>
               ) : (
                 <>
