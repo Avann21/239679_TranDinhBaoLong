@@ -36,6 +36,7 @@ cp .env.example .env
 npm install
 npm run dev
 ```
+Frontend chạy tại `http://localhost:3000` (Vite), gọi API theo `VITE_API_URL` trong `.env`.
 
 ### Backend bằng Docker
 ```bash
@@ -73,14 +74,16 @@ docker run -d --name frontend -p 8080:80 \
 ```
 Frontend chạy tại `http://localhost:8080`. Ứng dụng gọi API qua đường dẫn `/api`,
 nginx trong container chuyển tiếp sang `BACKEND_URL` (truyền lúc chạy, không nhúng
-địa chỉ localhost vào image). Nếu muốn nhúng thẳng địa chỉ API vào bundle thì build với
+địa chỉ localhost vào image). `BACKEND_URL` là gốc của backend, **không** kèm `/api`
+(ví dụ `https://two39679-trandinhbaolong-backend.onrender.com`). Nếu muốn nhúng thẳng
+địa chỉ API vào bundle thì build với
 `--build-arg VITE_API_URL=https://<backend-api>/api`.
 
 ## Triển khai trên Render
 - Backend: Web Service chạy Docker image `longtran2111/backend:latest`, biến môi trường
   `MONGODB_URI` (chuỗi kết nối Atlas), health check `/health`.
   API: https://two39679-trandinhbaolong-backend.onrender.com/api/employees
-- Frontend: Static Site dựng từ GitHub (`npm ci && npm run build`, publish `frontend/build`).
+- Frontend: Static Site dựng từ GitHub (`npm ci && npm run build`, publish thư mục `build` của frontend).
   Địa chỉ API production đặt trong `frontend/.env.production`
   (`VITE_API_URL=https://two39679-trandinhbaolong-backend.onrender.com/api`).
   Ứng dụng: https://two39679-trandinhbaolong.onrender.com
