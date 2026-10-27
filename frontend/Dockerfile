@@ -30,4 +30,7 @@ COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 #   docker run -e BACKEND_URL=https://<backend-api> ...
 ENV BACKEND_URL=http://backend:5000
 
+# Render tự cấp biến PORT, nginx sẽ lắng nghe cổng này (mặc định 80 khi chạy local)
+ENV PORT=80
+
 EXPOSE 80

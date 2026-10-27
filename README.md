@@ -76,10 +76,19 @@ nginx trong container chuyển tiếp sang `BACKEND_URL` (truyền lúc chạy, 
 địa chỉ localhost vào image). Nếu muốn nhúng thẳng địa chỉ API vào bundle thì build với
 `--build-arg VITE_API_URL=https://<backend-api>/api`.
 
+## Triển khai trên Render
+- Backend: Web Service chạy Docker image `longtran2111/backend:latest`, biến môi trường
+  `MONGODB_URI` (chuỗi kết nối Atlas), health check `/health`.
+  API: https://two39679-trandinhbaolong-backend.onrender.com/api/employees
+- Frontend: Static Site dựng từ GitHub (`npm ci && npm run build`, publish `frontend/build`).
+  Địa chỉ API production đặt trong `frontend/.env.production`
+  (`VITE_API_URL=https://two39679-trandinhbaolong-backend.onrender.com/api`).
+  Ứng dụng: https://two39679-trandinhbaolong.onrender.com
+
 ## Link tài nguyên
 - Link GitHub repository: https://github.com/Avann21/239679_TranDinhBaoLong.git
 - Link Docker Hub Backend: https://hub.docker.com/r/longtran2111/backend
 - Link Docker Hub Frontend: https://hub.docker.com/r/longtran2111/frontend
-- Link Render App: (chưa có)
-- Link Render API: (chưa có)
-- Link MongoDB Atlas: mongodb+srv://239679-TranDinhBaoLong:Long@1234@cluster0.z1v98m5.mongodb.net/
+- Link Render App (Frontend): https://two39679-trandinhbaolong.onrender.com
+- Link Render API (Backend): https://two39679-trandinhbaolong-backend.onrender.com
+- Link MongoDB Atlas: MongoDB Atlas (chuỗi kết nối chỉ lưu trong biến môi trường MONGODB_URI, không đưa lên GitHub)

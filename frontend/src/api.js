@@ -19,12 +19,12 @@ const jsonOptions = (method, body) => ({
 });
 
 export const fetchEmployees = (search = '') =>
-  request(search ? `?search=${encodeURIComponent(search)}` : '');
+  request(`/employees${search ? `?search=${encodeURIComponent(search)}` : ''}`);
 
-export const fetchEmployee = (id) => request(`/${id}`);
+export const fetchEmployee = (id) => request(`/employees/${id}`);
 
-export const createEmployee = (data) => request('', jsonOptions('POST', data));
+export const createEmployee = (data) => request('/employees', jsonOptions('POST', data));
 
-export const updateEmployee = (id, data) => request(`/${id}`, jsonOptions('PUT', data));
+export const updateEmployee = (id, data) => request(`/employees/${id}`, jsonOptions('PUT', data));
 
-export const deleteEmployee = (id) => request(`/${id}`, { method: 'DELETE' });
+export const deleteEmployee = (id) => request(`/employees/${id}`, { method: 'DELETE' });
